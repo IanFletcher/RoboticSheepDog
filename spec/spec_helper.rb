@@ -1,2 +1,2 @@
-require_relative '../lib/robot_controller'
+require_relative '../lib/sheep_dog_navigation'
 require_relative '../lib/paddock'
