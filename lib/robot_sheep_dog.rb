@@ -1,7 +1,7 @@
 class RobotSheepDog
   attr_reader :active, :x, :y, :prev_x, :prev_y, :move_counter
-  def initialize(x, y, facing, orders)
-    @x, @y, @facing @orders = x, y, COMPASS.index(facing), orders
+  def initialize(x, y, heading, orders)
+    @x, @y, @heading @orders = x, y, COMPASS.index(heading), orders
     @move_counter = 0
     @active = true
   end
@@ -21,7 +21,7 @@ class RobotSheepDog
   end
 
   def position
-    puts "#{x} #{y} #{facing}"
+    puts "#{x} #{y} #{heading}"
   end
 
   def deactivate
@@ -42,13 +42,13 @@ class RobotSheepDog
   def next_instruction
     case direction
       when 'L'
-        @facing -= 1
-        @facing = 4 if facing == -1
+        @heading -= 1
+        @heading = 4 if heading == -1
       when 'R'
-        @facing += 1
-        @facing = 1 if facing == 5
+        @heading += 1
+        @heading = 1 if heading == 5
       when 'M'
-        case COMPASS[@facing]
+        case COMPASS[@heading]
           when 'N' then @y += 1
           when 'S' then @y -= 1
           when 'E' then @x += 1

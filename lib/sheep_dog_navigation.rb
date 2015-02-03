@@ -1,4 +1,4 @@
-module RobotController
+module SheepDogNavigation
   class << self
     attr_reader :filename, :instruction_array, :paddock
     def loadfile(filename)

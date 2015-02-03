@@ -1,6 +1,6 @@
 require 'spec_helper'
-describe RobotController do
-  let(:rc) { RobotController}
+describe SheetDogNavigation do
+  let(:rc) { SheetDogNavigation}
   describe '#loadfile' do
     it 'has a filename' do
       rc.loadfile "spec/robot_instructions.txt"
