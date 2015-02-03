@@ -44,12 +44,13 @@ Example input/output
 Test Input:
 -----------
 
->55
-12N 
-LMLMLMLMM 
-33E 
-MMRMMRMRRM
+>5 5
+>1 2 N 
+>LMLMLMLMM 
+>3 3 E 
+>MMRMMRMRRM
 
 Expected Output:
 ----------------
->13N 51E
+>1 3 N 
+>5 1 E

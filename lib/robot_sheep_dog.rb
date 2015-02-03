@@ -1,34 +1,27 @@
 class RobotSheepDog
-  attr_reader :active, :x, :y, :prev_x, :prev_y, :move_counter
+  attr_reader :active, :x, :y, :prev_x, :prev_y, :move_counter, :orders
   def initialize(x, y, heading, orders)
     @x, @y, @heading @orders = x, y, COMPASS.index(heading), orders
-    @move_counter = 0
+    @move_counter = -1
     @active = true
   end
 
   def prepare_move(paddock)
     if active?
       move_counter += 1
-      if movecounter == 1
+      if move_counter == 0
         paddock.place_dog(self)
       else
         record_prev_position
         next_instruction 
         paddock.plot(self)
       end
-      finish if move_counters > move_counter
+      finish if move_counters > orders.count
     end
   end
 
   def position
     puts "#{x} #{y} #{heading}"
-  end
-
-  def deactivate
-    if @prev_x != x and @prev_y != y
-    @x = prev_x
-    @y = prev_y
-    finish
   end
 
   def finish
@@ -62,3 +55,4 @@ class RobotSheepDog
   end
   COMPASS = ['N', 'E','S', 'W']
 end
+

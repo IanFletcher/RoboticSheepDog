@@ -22,11 +22,16 @@ class Paddock
   end
 
   def activity
-    while dogs_active?
+    while any_dogs_active?
       dogs.each do |dg|
         dg.prepare_move(self)
       end
       collisions
+      puts "Dogs Positions"
+      puts "--------------"
+      dogs.each do |dg|
+        dg.position
+      end
     end
   end
   def plot(dog)
@@ -37,29 +42,22 @@ class Paddock
   def remove_dog(dog)
     sector = @map[dog.prev_x, dog.prev_y]
     sector.delete(dog)
+    @map[dog.prev_x, dog.prev_y] = sector
   end
 
   def place_dog(dog)
-    sector = @map[dog.x, dog.y] 
+    sector = @map[dog.x, dog.y] if in_paddock?
     sector << dog
     @map[dog.x, dog.y] = sector
   end
 
-  def erase_dog(dog)
-    sector = @map[dog.x, dog.y]
-    sector.delete(dog)
-  end
-
   def collisions
-    #boundery or other dog
     check_collisions.each do |dg|
-      erase_dog(dg)
-      dg.deactivate
-      place_dog(dg)
+      raise RobotSheepDogCollision, "Woof Woof Splat paddock co-ordinates #{dg.x} - #{dg.y}"
     end
   end
 
-  def dogs_active?  
+  def any_dogs_active?  
     active_robots = dogs.map {|dg| dg.active? }
     active_robots.include?(true)
   end
@@ -74,3 +72,5 @@ class Paddock
     dog_collisions
   end
 end
+
+class RobotSheepDogCollision < StandardError; end
