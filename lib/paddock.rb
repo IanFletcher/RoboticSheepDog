@@ -35,7 +35,7 @@ class Paddock
       puts "Dogs Positions"
       puts "--------------"
       dogs.each do |dg|
-        dg.position
+        puts dg.position
       end
     end
 
