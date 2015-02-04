@@ -1,5 +1,5 @@
 class RobotSheepDog
-  attr_reader :active, :x, :y, :prev_x, :prev_y, :move_counter, :orders, :heading
+  attr_reader :x, :y, :prev_x, :prev_y, :move_counter, :orders, :heading
   def initialize(x, y, heading, orders)
     @x, @y, @heading, @orders = x, y, COMPASS.index(heading), orders
     @move_counter = -1
@@ -25,7 +25,7 @@ class RobotSheepDog
   end
 
   def active?
-    active == true
+    @active == true
   end
 
   private

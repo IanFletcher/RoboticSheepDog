@@ -13,8 +13,7 @@ module SheepDogNavigation
 
     private
       def setup
-        @instruction_array = read_instructions
-        dimentions = @instruction_array.shift
+        dimentions = read_instructions.shift
         row, cell = dimentions.split(' ').map(&:to_i)
         @paddock = @paddock_area.new(row, cell)
         robot_instructions.each do | commands |
@@ -26,7 +25,7 @@ module SheepDogNavigation
 
       def read_instructions
         array = IO.readlines(filename)
-        array.map(&:strip)
+        @instruction_array = array.map(&:strip)
       end
 
       def robot_instructions
