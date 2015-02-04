@@ -35,7 +35,7 @@ describe RobotSheepDog do
   end
   describe '#active?' do
     it 'when it has more instructions to follow' do
-      expect(fido.active?).to be_true
+      expect(fido.active?).to eq true
     end
     it 'is false when there is no more instructions' do
       expect{4.times {fido.prepare_move(paddock)}}.to change{fido.active?}.from(true).to(false)
