@@ -1,14 +1,14 @@
 class RobotSheepDog
-  attr_reader :active, :x, :y, :prev_x, :prev_y, :move_counter, :orders
+  attr_reader :active, :x, :y, :prev_x, :prev_y, :move_counter, :orders, :heading
   def initialize(x, y, heading, orders)
-    @x, @y, @heading @orders = x, y, COMPASS.index(heading), orders
+    @x, @y, @heading, @orders = x, y, COMPASS.index(heading), orders
     @move_counter = -1
     @active = true
   end
 
   def prepare_move(paddock)
     if active?
-      move_counter += 1
+      @move_counter += 1
       if move_counter == 0
         paddock.place_dog(self)
       else
@@ -16,7 +16,7 @@ class RobotSheepDog
         next_instruction 
         paddock.plot(self)
       end
-      finish if move_counters > orders.count
+      finish if move_counter == orders.count
     end
   end
 
@@ -33,7 +33,7 @@ class RobotSheepDog
   end
 
   def next_instruction
-    case direction
+    case orders[move_counter - 1]
       when 'L'
         @heading -= 1
         @heading = 4 if heading == -1
