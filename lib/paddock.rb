@@ -54,7 +54,7 @@ class Paddock
     end
 
     def any_dogs_active?
-      active_robots = dogs.map {|dg| dg.active? }
+      active_robots = dogs.map(&:active?)
       active_robots.include?(true)
     end
 
@@ -63,7 +63,7 @@ class Paddock
       map.each do |row|
         row.each do |col|
           if col.count > 1
-            dog_collisions << col  
+            dog_collisions << col
             dog_collisions.flatten!
           end
         end
@@ -72,7 +72,7 @@ class Paddock
     end
 
     def in_paddock(dog)
-      if dog.x >= 0 and dog.x <= x and dog.y >= 0 and dog.y <= y
+      if dog.x >= 0 && dog.x <= x && dog.y >= 0 && dog.y <= y
         true
       else
         raise OutOfPaddock, "Electronic Fido is out of bounds co-ordinates #{dog.x} - #{dog.y}"

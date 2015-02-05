@@ -13,7 +13,7 @@ class RobotSheepDog
         paddock.place_dog(self)
       else
         record_prev_position
-        next_instruction 
+        next_instruction
         paddock.plot(self)
       end
       finish if move_counter > orders.count
@@ -29,6 +29,7 @@ class RobotSheepDog
   end
 
   private
+
     def finish
       @active = false
     end
@@ -42,18 +43,21 @@ class RobotSheepDog
           @heading += 1
           @heading = 1 if heading == 5
         when 'M'
-          case COMPASS[@heading]
-            when 'N' then @y += 1
-            when 'S' then @y -= 1
-            when 'E' then @x += 1
-            when 'W' then @x -= 1
-          end
+          move_direction
+      end
+    end
+
+    def move_direction
+      case COMPASS[@heading]
+        when 'N' then @y += 1
+        when 'S' then @y -= 1
+        when 'E' then @x += 1
+        when 'W' then @x -= 1
       end
     end
 
     def record_prev_position
       @prev_x, @prev_y= x, y
     end
-    COMPASS = ['N', 'E','S', 'W']
+    COMPASS = ['N', 'E', 'S', 'W']
 end
-
