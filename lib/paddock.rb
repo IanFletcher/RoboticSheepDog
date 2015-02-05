@@ -1,9 +1,9 @@
 class Paddock
   attr_reader :x, :y, :map, :dogs
-  def initialize(x,y)
+  def initialize(x, y)
     @x, @y = x, y
     @dogs = []
-    @map = Array.new(y + 1) { Array.new(x + 1) {[]} }
+    @map = Array.new(y + 1) { Array.new(x + 1) { [] } }
   end
 
   def add_robot(dog)
@@ -19,6 +19,7 @@ class Paddock
     end
     final_positions
   end
+
   def plot(dog)
     remove_dog(dog)
     place_dog(dog)
@@ -31,9 +32,10 @@ class Paddock
   end
 
   private
+
     def final_positions
-      puts "Dogs Positions"
-      puts "--------------"
+      puts 'Dogs Positions'
+      puts '--------------'
       dogs.each do |dg|
         puts dg.position
       end
@@ -45,14 +47,13 @@ class Paddock
       @map[dog.prev_y][dog.prev_x] = sector
     end
 
-
     def collisions
       check_collisions.each do |dg|
         raise RobotSheepDogCollision, "Woof Woof Splat paddock co-ordinates {dg.x} - #{dg.y}"
       end
     end
 
-    def any_dogs_active?  
+    def any_dogs_active?
       active_robots = dogs.map {|dg| dg.active? }
       active_robots.include?(true)
     end
