@@ -8,15 +8,15 @@ class RobotSheepDog
 
   def prepare_move(paddock)
     if active?
-      @move_counter += 1
-      if move_counter == 0
+      if set_dog
         paddock.place_dog(self)
       else
         record_prev_position
         next_instruction
         paddock.plot(self)
       end
-      finish if move_counter > orders.count
+      finish if move_counter == orders.count
+      @move_counter += 1
     end
   end
 
@@ -29,13 +29,16 @@ class RobotSheepDog
   end
 
   private
+    def set_dog
+      move_counter == -1
+    end
 
     def finish
       @active = false
     end
 
     def next_instruction
-      case orders[move_counter - 1]
+      case orders[move_counter ]
         when 'L'
           @heading -= 1
           @heading = 4 if heading == -1
